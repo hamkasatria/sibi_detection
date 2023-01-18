@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  icevision:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: sibi_detection
+    ports:
+      - '7861:7861'
+    volumes:
+      - ../:/root/
