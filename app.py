@@ -33,9 +33,10 @@ def load_model(backbone, model_name):
 
 
 # Just change the value of selection to try another model
-# 0 -> faster rcnn resnet 50 
+# 0 -> faster rcnn resnet 50
 # 1 -> faster rcnn resnet 18
-selection = 0
+
+selection = 1
 path_best_model = ''
 
 extra_args = {}
@@ -53,39 +54,19 @@ if selection == 1:
   
 model, model_type = load_model(backbone, model_name)
 
-
-start_time = ""
-count = 0
 def pred(input_image):
-  global count, start_time, model_name
-  if start_time == "":
-    start_time = time.time()
-  # try:
-  detection_threshold=0.5
-  display_label = True
-  display_bbox = True
+  try:
+    detection_threshold=0.5
+    display_label = True
+    display_bbox = True
 
-  img = PIL.Image.fromarray(input_image, 'RGB')
-  pred_dict  = model_type.end2end_detect(img, valid_tfms, model, class_map=class_map, detection_threshold=detection_threshold, display_label=display_label, display_bbox=display_bbox, return_img=True, font_size=16, label_color="#FF59D6")
-  count = count +1
-  if count == 100:
-    end_time = time.time()
-    elapsed = end_time-start_time
-    str_time = time.strftime("%H:%M:%S", time.gmtime(elapsed))
+    img = PIL.Image.fromarray(input_image, 'RGB')
+    pred_dict  = model_type.end2end_detect(img, valid_tfms, model, class_map=class_map, detection_threshold=detection_threshold, display_label=display_label, display_bbox=display_bbox, return_img=True, font_size=16, label_color="#FF59D6")
+    return pred_dict['img']
     
-    print("Model = ", model_name)
-    print("time = ", str_time)
-    print ("FPS = ", count,"/", int(elapsed)," = ", (count/int(elapsed)) )
+  except:
+    raise gr.Error("Error file type ! ")
 
-  return pred_dict['img']
-    
-  # except:
-  #   raise gr.Error("Error file type ! ")
-    # return input_image
-
-
-# def pred(img):
-#   return img
 
 with gr.Blocks() as demo:
     gr.Markdown('<h1> <p style="text-align: center;"> Pengenalan Abjad SIBI</p></h1>')
@@ -112,4 +93,4 @@ with gr.Blocks() as demo:
 
 
 
-demo.launch(inline=True, share=True, debug=True, show_error= True, server_port=7867)
+demo.launch(inline=True, debug=True, show_error= True, server_port=5100)
