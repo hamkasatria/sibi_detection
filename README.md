@@ -10,7 +10,7 @@
 - Docker : `make docker.all`
 
 
-### **Download models with command**
+### **Download models**
 ```
 make download.model.all
 ```
@@ -19,7 +19,7 @@ make download.model.all
 
 1. Install IceVision and Gradio with `make setup.all`
 2. run app with `make sibi.run`
-3. hit open port and enjoy it
+3. hit open port, allow camera acess and enjoy it : )
 
 
 ## B. ***Manual** Run With Docker*
@@ -32,3 +32,21 @@ make download.model.all
 >**Note**
 > - For more detailed instructions on how to use this icevision docker container as well how connect it to Visual Studio Code, check out this in-depth [blog post](https://francescopochetti.com/developing-inside-a-docker-container-in-visual-studio-code/).
 >-  change the models type to run with change the `selection` in app.py files
+
+## **Directory**
+
+```
+│   README.md
+|   Makefile --> makefile
+│   app.py --> main file to imlementation models  
+│
+└─── .devcontainer --> package to deployment
+│   │   Dockerfile
+│   │   docker-compose.yaml
+|   |   devcontainer.json
+│   
+└─── icevision_model_builder --> create own models with colab
+    |   test_object_detection.ipynb --> test model
+    │   training_object_detection.ipnyb --> train model
+
+```
