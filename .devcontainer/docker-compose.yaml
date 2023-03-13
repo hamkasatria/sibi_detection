@@ -1,0 +1,24 @@
+# version: "3"
+
+# services:
+#   icevision:
+#     build:
+#       dockerfile: Dockerfile
+#       context: .
+#     image: sibi_detection
+#     ports:
+#       - '7861:7861'
+#     volumes:
+#       - ../:/root/
+
+# docker-compose.yaml: used to build the IceVision Dockerfile and run a container
+version: "3"
+services:
+  icevision:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: ice
+    tty: true # attaches a terminal to the container
+    volumes:
+      - ../:/root/

@@ -1,4 +1,4 @@
-from icevision.all import *
+from icevision.all import ClassMap,tfms, Adam, COCOMetric, COCOMetricType, models
 
 import PIL
 import torch
@@ -36,7 +36,7 @@ def load_model(backbone, model_name):
 # 0 -> faster rcnn resnet 50
 # 1 -> faster rcnn resnet 18
 
-selection = 1
+selection = 0
 path_best_model = ''
 
 extra_args = {}
@@ -93,4 +93,4 @@ with gr.Blocks() as demo:
 
 
 
-demo.launch(inline=True, debug=True, show_error= True, server_port=5100)
+demo.launch(inline=True, debug=True, share=True, show_error= True, server_port=5100)
